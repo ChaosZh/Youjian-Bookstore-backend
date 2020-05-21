@@ -2,17 +2,23 @@
 # @Author   : Chao Zheng
 # @Email    : chaoszh@foxmail.com
 
-import sys
-from flask import Blueprint
+from flask import Blueprint, request
+from api.util.response import SuccessResponse, FailureResponse
+from database import sql
 
 carts = Blueprint("carts", __name__,  url_prefix='/cart')
 
 @carts.route('/add', methods = ['POST'])
 def cart_add():
-    return ('%s'%sys._getframe().f_code.co_name)
+    data = request.json
+    sql.add_cart(data['book_id'], data['user_id'], data['number'])
+    return SuccessResponse()
+
 
 @carts.route('/remove', methods = ['POST'])
 def cart_remove():
-    return ('%s'%sys._getframe().f_code.co_name)
+    data = request.json
+    sql.remove_cart(data['book_id'], data['user_id'])
+    return SuccessResponse()
 
 
