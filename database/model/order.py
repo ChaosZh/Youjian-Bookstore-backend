@@ -10,8 +10,7 @@ class Order(db.Model):
     user_id = db.Column(db.Integer)
     book_json = db.Column(db.String(200))
 
-    def __init__(self, id, user_id, book_json):
-        self.id = id
+    def __init__(self, user_id, book_json):
         self.user_id = user_id
         self.book_json = book_json
         return

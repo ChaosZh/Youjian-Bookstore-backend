@@ -3,18 +3,28 @@
 # @Email    : chaoszh@foxmail.com
 
 import json
-from werkzeug.wrappers import Response
+from flask import make_response
 
 def SuccessResponse(code=200, data=None):
-    response=Response()
-    response.data=json.dumps(data)
-    response.status_code=code
-    response.headers=[('Content-Type','application/json')]
+    headers = {
+        'content-type':'application/json'
+    }
+    data={
+        "code": code,
+        "data": data
+    }
+    response=make_response(data, code)
+    response.headers=headers
     return response
 
 def FailureResponse(code=400, data=None):
-    response=Response()
-    response.data=data
-    response.status_code=code
-    response.headers=[('Content-Type','text/plain')]
+    headers = {
+        'content-type':'application/json'
+    }
+    data={
+        "code": code,
+        "error_msg": data
+    }
+    response=make_response(data, code)
+    response.headers=headers
     return response

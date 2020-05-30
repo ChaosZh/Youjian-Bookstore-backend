@@ -10,7 +10,7 @@ items = Blueprint(name = 'items', import_name = __name__,  url_prefix='/item')
 
 @items.route('/<int:id>', methods=['GET'])
 def get_item(id):
-    book = sql.get_book(id)
+    book = sql.get_book(id)[0]
     res = {
         'id': book.id,
         'name': book.name,

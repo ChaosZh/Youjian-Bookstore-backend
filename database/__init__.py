@@ -5,9 +5,7 @@
 from flask_sqlalchemy import SQLAlchemy
 
 db=SQLAlchemy()
-wuwuwu='yes 1 time'
 
 def connect_to_mysql(app):
     db.init_app(app)
     app.app_context().push()
-    wuwuwu='no 2 time'

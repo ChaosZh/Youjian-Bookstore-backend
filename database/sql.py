@@ -23,16 +23,20 @@ def get_books(book_class):
     books = Book.query.filter_by(book_class=book_class).all()
     return books
 
+def get_cart(user_id):
+    books = Cart.query.filter_by(user_id=user_id).all()
+    return books
+
 def add_cart(book_id, user_id, number):
     cart = Cart(book_id, user_id, number)
     db.session.add(cart)
-    db.commit()
+    db.session.commit()
     return
 
 def remove_cart(book_id, user_id):
     cart = Cart.query.filter_by(book_id=book_id, user_id=user_id).first()
-    db.session.remove(cart)
-    db.commit()
+    db.session.delete(cart)
+    db.session.commit()
     return
 
 def get_order(id):
@@ -43,15 +47,15 @@ def get_orders(user_id):
     orders = Order.query.filter_by(user_id=user_id).all()
     return orders
 
-def add_order(id, user_id, books):
+def add_order(user_id, books):
     book_json = json.dumps(books)
-    order = Order(id, user_id, book_json)
+    order = Order(user_id, book_json)
     db.session.add(order)
-    db.commit()
+    db.session.commit()
     return
 
 def remove_order(id):
     order = Order.query.filter_by(id=id).first()
-    db.session.remove(order)
-    db.commit()
+    db.session.delete(order)
+    db.session.commit()
     return

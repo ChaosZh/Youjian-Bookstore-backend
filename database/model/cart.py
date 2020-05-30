@@ -4,7 +4,6 @@
 
 from database import db
 
-
 class Cart(db.Model):
     __tablename__='cart'
     book_id = db.Column(db.Integer, primary_key=True)

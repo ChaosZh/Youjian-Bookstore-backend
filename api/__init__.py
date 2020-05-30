@@ -12,4 +12,4 @@ def register_blueprint(app):
     app.register_blueprint(items)
     app.register_blueprint(carts)
     app.register_blueprint(orders)
-    return
+    return app
