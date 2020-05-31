@@ -4,6 +4,8 @@
 
 from flask import Flask
 from flask_cors import CORS
+import pymysql
+pymysql.install_as_MySQLdb()
 from config import Config
 from api import register_blueprint
 from database import connect_to_mysql
@@ -24,4 +26,4 @@ def createApp(app):
 
 app = Flask(__name__)
 app = createApp(app)
-app.run(debug=True)
+app.run(port=5001)
